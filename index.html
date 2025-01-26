@@ -65,6 +65,19 @@
             color: #ed7318;
             margin-bottom: 20px;
         }
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: transparent;
+            border: none;
+            font-size: 24px;
+            color: #ed7318;
+            cursor: pointer;
+        }
+        .close-button:hover {
+            color: #d66616;
+        }
         @media (max-width: 600px) {
             .botones {
                 flex-direction: column;
@@ -76,8 +89,10 @@
 <body onload="openModal()">
     <div class="overlay" id="overlay">
         <div class="venta">
+            <button class="close-button" onclick="window.location.href='https://www.vendeygana.net/user/'">&times;</button>
             <img class="imagen" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Directv_LA_logo.svg/1200px-Directv_LA_logo.svg.png" alt="Logo DIRECTV">
-            <div class="header-title">RECARGAS DIRECTV (COLOMBIA)</div>
+            <div class="header-title">RECARGAS DIRECTV</div>
+            <img class="imagen" src="https://cloudfront-us-east-1.images.arcpublishing.com/infobae/TXHTJNA6YZEYPMOM4A2JGMVETM.gif" alt="Promo GIF">
             <p>Vende y Gana te ofrece las recargas DIRECTV AL MEJOR PRECIO</p>
             <div class="botones">
                 <button class="boton" onclick="window.location.href='https://dptodecomprasvg.company.site/products/DIRECTV-p721233596'">Recargar</button>
