@@ -96,7 +96,7 @@
         }
         .toggle-button {
             display: inline-block;
-            margin-bottom: 10px;
+            margin-top: 20px;
             padding: 10px 20px;
             background-color: #000;
             color: #fff;
@@ -188,13 +188,8 @@
 <body>
     <div class="container">
         <button class="close-button" onclick="redirectToUrl()">X</button>
-        <div>
-            <!-- Formulario embebido de FluidForms -->
-            <iframe src="https://fluidforms.co/embed/form?id=679e428d316c268971c1eaaf" width="100%" height="500px" frameborder="0"></iframe>
-        </div>
 
-        <button class="toggle-button" id="toggleButton" onclick="toggleConversionTable()">CONVERSIÓN DE PESOS A BS EN RECARGA DIRECTV</button>
-
+        <!-- Tabla de conversión en la parte superior -->
         <div class="conversion-table" id="conversionTable">
             <h2>Tabla de Conversión de Pesos a Bolívares - Recarga Directv</h2>
             <div class="conversion-result" id="conversionResult"></div>
@@ -204,6 +199,14 @@
                 <input type="number" id="monto" name="monto" oninput="convertToBs()" required>
                 <span id="minRecargaMsg" class="error">Recarga Mínima 10 MIL Pesos</span>
             </div>
+        </div>
+
+        <!-- Botón para minimizar la tabla de conversión -->
+        <button class="toggle-button" id="toggleButton" onclick="toggleConversionTable()">MINIMIZAR TABLA DE CONVERSIÓN</button>
+
+        <!-- Formulario embebido de FluidForms debajo de la tabla de conversión -->
+        <div>
+            <iframe src="https://fluidforms.co/embed/form?id=679e428d316c268971c1eaaf" width="100%" height="500px" frameborder="0"></iframe>
         </div>
     </div>
 
@@ -304,12 +307,10 @@
 
             if (conversionTable.classList.contains('hidden')) {
                 conversionTable.classList.remove('hidden');
-                toggleButton.classList.remove('minimized');
-                toggleButton.textContent = 'MINIMIZAR CONVERSIÓN DE PESOS A BS EN RECARGA DIRECTV';
+                toggleButton.textContent = 'MINIMIZAR TABLA DE CONVERSIÓN';
             } else {
                 conversionTable.classList.add('hidden');
-                toggleButton.classList.add('minimized');
-                toggleButton.textContent = 'CONVERSIÓN DE PESOS A BS';
+                toggleButton.textContent = 'MAXIMIZAR TABLA DE CONVERSIÓN';
             }
         }
 
