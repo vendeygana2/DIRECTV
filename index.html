@@ -14,14 +14,13 @@
         }
         .container {
             width: 100%;
-            height: 100vh;
-            margin: auto;
+            max-width: 1200px;
+            margin: 0 auto;
             background-color: #fff;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             position: relative;
-            overflow-y: auto;
         }
         .close-button {
             position: absolute;
@@ -156,15 +155,19 @@
         .warning-message img {
             margin-right: 10px;
         }
+        .iframe-container {
+            width: 100%;
+            margin-top: 20px;
+        }
+        .iframe-container iframe {
+            width: 100%;
+            height: 100vh; /* Ajusta el alto al 100% de la pantalla */
+            border: none;
+        }
         @media (max-width: 600px) {
-            body {
-                padding: 0;
-            }
             .container {
-                width: 100%;
-                height: 100vh;
-                border-radius: 0;
                 padding: 10px;
+                border-radius: 0;
                 box-shadow: none;
             }
             .conversion-table {
@@ -204,9 +207,9 @@
         <!-- Botón para minimizar la tabla de conversión -->
         <button class="toggle-button" id="toggleButton" onclick="toggleConversionTable()">MINIMIZAR TABLA DE CONVERSIÓN</button>
 
-        <!-- Formulario embebido de FluidForms debajo de la tabla de conversión -->
-        <div>
-            <iframe src="https://fluidforms.co/embed/form?id=679e428d316c268971c1eaaf" width="100%" height="500px" frameborder="0"></iframe>
+        <!-- Contenedor para el formulario embebido -->
+        <div class="iframe-container">
+            <iframe src="https://form.jotform.com/250576489471065"></iframe>
         </div>
     </div>
 
@@ -225,29 +228,29 @@
     <script>
         const conversionTable = {
             1000: 24.00,
-2000: 48.00,
-3000: 72.00,
-4000: 96.00,
-5000: 120.00,
-6000: 144.00,
-7000: 168.00,
-8000: 192.00,
-9000: 216.00,
-10000: 240.00,
-20000: 466.00,
-30000: 691.00,
-40000: 917.00,
-50000: 1142.00,
-60000: 1368.00,
-70000: 1593.00,
-80000: 1819.00,
-90000: 2044.00,
-100000: 2270.00,
-110000: 2495.00,
-120000: 2721.00,
-130000: 2946.00,
-140000: 3172.00,
-150000: 3397.00
+            2000: 48.00,
+            3000: 72.00,
+            4000: 96.00,
+            5000: 120.00,
+            6000: 144.00,
+            7000: 168.00,
+            8000: 192.00,
+            9000: 216.00,
+            10000: 240.00,
+            20000: 466.00,
+            30000: 691.00,
+            40000: 917.00,
+            50000: 1142.00,
+            60000: 1368.00,
+            70000: 1593.00,
+            80000: 1819.00,
+            90000: 2044.00,
+            100000: 2270.00,
+            110000: 2495.00,
+            120000: 2721.00,
+            130000: 2946.00,
+            140000: 3172.00,
+            150000: 3397.00
         };
         let minRecarga = 10000; // Mínima recarga en pesos
 
