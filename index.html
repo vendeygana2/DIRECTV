@@ -322,9 +322,13 @@
             }
         }
 
-        // Función para redirigir al enlace proporcionado
+        // Función para redirigir al enlace proporcionado o regresar a la página anterior
         function redirectToUrl() {
-            window.location.href = 'https://www.vendeygana.net/user/';
+            if (document.referrer) {
+                window.history.back(); // Regresa a la página anterior
+            } else {
+                window.location.href = 'https://www.vendeygana.net/user/'; // Redirige a la URL por defecto
+            }
         }
     </script>
 </body>
