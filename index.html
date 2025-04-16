@@ -164,6 +164,35 @@
             height: 100vh; /* Ajusta el alto al 100% de la pantalla */
             border: none;
         }
+        /* Estilos para el modal de imagen */
+        .image-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            z-index: 2000;
+            text-align: center;
+        }
+        .image-modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
         @media (max-width: 600px) {
             .container {
                 padding: 10px;
@@ -185,10 +214,25 @@
             .conversion-table.hidden + .form-group {
                 margin-top: 0;
             }
+            .image-modal-content {
+                max-width: 95%;
+                max-height: 95%;
+            }
+            .close-modal {
+                top: 10px;
+                right: 20px;
+                font-size: 30px;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Modal para la imagen emergente -->
+    <div id="imageModal" class="image-modal">
+        <span class="close-modal" onclick="closeImageModal()">&times;</span>
+        <img src="https://d2j6dbq0eux0bg.cloudfront.net/images/110979006/4871899823.jpg" class="image-modal-content" alt="Imagen informativa">
+    </div>
+
     <div class="container">
         <button class="close-button" onclick="redirectToUrl()">X</button>
 
@@ -253,6 +297,16 @@
 150000: 4448.00
         };
         let minRecarga = 10000; // Mínima recarga en pesos
+
+        // Mostrar modal de imagen al cargar la página
+        window.onload = function() {
+            document.getElementById('imageModal').style.display = 'block';
+        };
+
+        // Función para cerrar el modal de imagen
+        function closeImageModal() {
+            document.getElementById('imageModal').style.display = 'none';
+        }
 
         // Función para convertir pesos a bolívares
         function convertToBs() {
