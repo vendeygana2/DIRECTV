@@ -193,6 +193,52 @@
             font-weight: bold;
             cursor: pointer;
         }
+        /* Nuevos estilos para el popup informativo */
+        .info-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 600px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.3);
+            z-index: 2000;
+            text-align: center;
+        }
+        .info-popup.active {
+            display: block;
+        }
+        .info-popup-header {
+            margin-bottom: 20px;
+        }
+        .info-popup-header img {
+            max-width: 130px; /* Reducido en 35% desde 200px */
+            margin-bottom: 15px;
+        }
+        .info-popup-content {
+            text-align: left;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        .info-popup-footer img {
+            max-width: 65%; /* Reducido en 35% desde 100% */
+            height: auto;
+            margin-top: 20px;
+        }
+        .info-popup-close {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
         @media (max-width: 600px) {
             .container {
                 padding: 10px;
@@ -223,14 +269,35 @@
                 right: 20px;
                 font-size: 30px;
             }
+            .info-popup {
+                width: 95%;
+                padding: 15px;
+            }
+            .info-popup-header img {
+                max-width: 100px; /* Reducido proporcionalmente para móvil */
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Modal para la imagen emergente -->
-    <div id="imageModal" class="image-modal">
-        <span class="close-modal" onclick="closeImageModal()">&times;</span>
-        <img src="https://d2j6dbq0eux0bg.cloudfront.net/images/110979006/4871899823.jpg" class="image-modal-content" alt="Imagen informativa">
+    <!-- Modal para la información -->
+    <div id="infoModal" class="info-popup active">
+        <div class="info-popup-header">
+            <img src="https://www.vendeygana.net/assets/img/logo-1.png" alt="Vende y Gana">
+            <h2>VENDE Y GANA INFORMA</h2>
+        </div>
+        <div class="info-popup-content">
+            <p>¡Hola! Gusto en Saludarte. 👋🏻</p>
+            <p>Te informamos que a partir del día 06/05/2025, los parámetros de recargas para la operadora Otros Servicios TV (DirecTV Colombia) son los siguientes:</p>
+            <p><strong>Mínima:</strong> 12.000 COP<br>
+            <strong>Múltiplos:</strong> 1.000 COP<br>
+            <strong>Máximo:</strong> 650.000 COP</p>
+            <p>Agradecemos tomar las previsiones correspondientes.</p>
+        </div>
+        <div class="info-popup-footer">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Directv_LA_logo.svg/2560px-Directv_LA_logo.svg.png" alt="Directv Logo">
+        </div>
+        <button class="info-popup-close" onclick="closeInfoModal()">Entendido</button>
     </div>
 
     <div class="container">
@@ -244,7 +311,7 @@
             <div class="form-group">
                 <label for="monto">Ingrese aquí el Monto a Recargar en Pesos para ver el Monto a Pagar en BS:</label>
                 <input type="number" id="monto" name="monto" oninput="convertToBs()" required>
-                <span id="minRecargaMsg" class="error">Recarga Mínima 10 MIL Pesos</span>
+                <span id="minRecargaMsg" class="error">Recarga Mínima 12.000 Pesos</span>
             </div>
         </div>
 
@@ -296,16 +363,11 @@
 140000: 4298.00,
 150000: 4563.00
         };
-        let minRecarga = 10000; // Mínima recarga en pesos
+        let minRecarga = 12000; // Mínima recarga en pesos actualizada
 
-        // Mostrar modal de imagen al cargar la página
-        window.onload = function() {
-            document.getElementById('imageModal').style.display = 'block';
-        };
-
-        // Función para cerrar el modal de imagen
-        function closeImageModal() {
-            document.getElementById('imageModal').style.display = 'none';
+        // Función para cerrar el modal de información
+        function closeInfoModal() {
+            document.getElementById('infoModal').classList.remove('active');
         }
 
         // Función para convertir pesos a bolívares
@@ -316,7 +378,14 @@
             const copyButton = document.getElementById('copyButton');
             let costo = 0;
 
-            if (isNaN(montoInput) || montoInput < minRecarga) {
+            if (isNaN(montoInput)) {
+                minRecargaMsg.style.display = 'none';
+                conversionResult.textContent = '';
+                copyButton.classList.add('hidden');
+                return;
+            }
+
+            if (montoInput < minRecarga) {
                 minRecargaMsg.style.display = 'block';
                 conversionResult.textContent = '';
                 copyButton.classList.add('hidden');
