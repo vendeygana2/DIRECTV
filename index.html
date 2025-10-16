@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora Directv - Ventana Emergente</title>
+    <title>Tabla de Conversión Directv</title>
     <style>
         * {
             margin: 0;
@@ -18,12 +18,6 @@
             line-height: 1.6;
             min-height: 100vh;
             padding: 20px;
-            transition: filter 0.3s ease;
-        }
-        
-        body.blurred {
-            filter: blur(5px);
-            pointer-events: none;
         }
         
         .container {
@@ -322,51 +316,6 @@
             transform: translateY(-2px);
         }
         
-        /* Estilos para simular la página de origen */
-        .page-content {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .page-title {
-            text-align: center;
-            margin-bottom: 30px;
-            color: #333;
-        }
-        
-        .open-calculator-btn {
-            display: block;
-            width: 300px;
-            margin: 30px auto;
-            padding: 15px 25px;
-            background: linear-gradient(to right, #007BFF, #0056b3);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 18px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        
-        .open-calculator-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-        }
-        
-        .service-description {
-            margin: 20px 0;
-            padding: 15px;
-            background-color: #f8f9fa;
-            border-radius: 8px;
-            border-left: 4px solid #007BFF;
-        }
-        
         @media (max-width: 600px) {
             body {
                 padding: 10px;
@@ -410,73 +359,10 @@
             .info-popup-header img {
                 max-width: 100px;
             }
-            
-            .open-calculator-btn {
-                width: 90%;
-            }
         }
     </style>
 </head>
 <body>
-    <!-- Contenido de ejemplo para simular la página de origen -->
-    <div class="page-content">
-        <h1 class="page-title">Vende y Gana - Servicios Directv</h1>
-        
-        <div class="service-description">
-            <h2>Recargas Directv Colombia</h2>
-            <p>Realiza recargas para Directv Colombia de forma rápida y segura. Utiliza nuestra calculadora para conocer el monto exacto en bolívares que debes pagar por tu recarga en pesos colombianos.</p>
-            <p><strong>Parámetros actualizados:</strong></p>
-            <ul>
-                <li>Mínima: 12.000 COP</li>
-                <li>Múltiplos: 1.000 COP</li>
-                <li>Máximo: 650.000 COP</li>
-            </ul>
-        </div>
-        
-        <button class="open-calculator-btn" onclick="openCalculator()">Abrir Calculadora de Conversión</button>
-        
-        <div class="service-description">
-            <h3>¿Cómo funciona?</h3>
-            <p>1. Haz clic en "Abrir Calculadora de Conversión"</p>
-            <p>2. Ingresa el monto en pesos colombianos que deseas recargar</p>
-            <p>3. La calculadora te mostrará automáticamente el equivalente en bolívares</p>
-            <p>4. Copia la información y pégala en el formulario de recarga</p>
-        </div>
-    </div>
-
-    <!-- Calculadora (inicialmente oculta) -->
-    <div id="calculatorModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1000; background-color: rgba(0,0,0,0.7);">
-        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 90%; max-width: 800px; max-height: 90vh; overflow-y: auto;">
-            <div class="container">
-                <div class="header">
-                    <h1>Calculadora de Conversión Directv</h1>
-                    <p>Convierte pesos colombianos a bolívares para recargas Directv</p>
-                    <button class="close-button" onclick="closeCalculator()">X</button>
-                </div>
-
-                <div class="content">
-                    <!-- Tabla de conversión -->
-                    <div class="conversion-table" id="conversionTable">
-                        <h2>Tabla de Conversión de Pesos a Bolívares</h2>
-                        <div class="form-group">
-                            <label for="monto">Ingrese el monto a recargar en pesos:</label>
-                            <input type="number" id="monto" name="monto" placeholder="Ej: 12000" oninput="convertToBs()" required>
-                            <span id="minRecargaMsg" class="error">Recarga Mínima 12.000 Pesos</span>
-                        </div>
-                        
-                        <div class="conversion-result" id="conversionResult"></div>
-                        <button class="copy-button hidden" id="copyButton" onclick="copyConversion()">Copiar información de conversión</button>
-                    </div>
-                    
-                    <!-- Botón para regresar a Vende y Gana -->
-                    <a href="https://vendeyganaservicios.company.site/products/directv" class="back-button" id="backButton">
-                        REGRESAR A VENDE Y GANA
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- Modal para la información -->
     <div id="infoModal" class="info-popup active">
         <div class="info-popup-header">
@@ -495,6 +381,34 @@
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Directv_LA_logo.svg/2560px-Directv_LA_logo.svg.png" alt="Directv Logo">
         </div>
         <button class="info-popup-close" onclick="closeInfoModal()">Entendido</button>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <h1>Calculadora de Conversión Directv</h1>
+            <p>Convierte pesos colombianos a bolívares para recargas Directv</p>
+            <button class="close-button" onclick="redirectToUrl()">X</button>
+        </div>
+
+        <div class="content">
+            <!-- Tabla de conversión -->
+            <div class="conversion-table" id="conversionTable">
+                <h2>Tabla de Conversión de Pesos a Bolívares</h2>
+                <div class="form-group">
+                    <label for="monto">Ingrese el monto a recargar en pesos:</label>
+                    <input type="number" id="monto" name="monto" placeholder="Ej: 12000" oninput="convertToBs()" required>
+                    <span id="minRecargaMsg" class="error">Recarga Mínima 12.000 Pesos</span>
+                </div>
+                
+                <div class="conversion-result" id="conversionResult"></div>
+                <button class="copy-button hidden" id="copyButton" onclick="copyConversion()">Copiar información de conversión</button>
+            </div>
+            
+            <!-- Botón para regresar a Vende y Gana -->
+            <a href="https://vendeyganaservicios.company.site/products/directv" class="back-button" id="backButton">
+                REGRESAR A VENDE Y GANA
+            </a>
+        </div>
     </div>
 
     <div class="popup" id="popup">
@@ -538,18 +452,6 @@
         };
         
         let minRecarga = 12000; // Mínima recarga en pesos actualizada
-
-        // Función para abrir la calculadora
-        function openCalculator() {
-            document.getElementById('calculatorModal').style.display = 'block';
-            document.body.classList.add('blurred');
-        }
-
-        // Función para cerrar la calculadora
-        function closeCalculator() {
-            document.getElementById('calculatorModal').style.display = 'none';
-            document.body.classList.remove('blurred');
-        }
 
         // Función para cerrar el modal de información
         function closeInfoModal() {
@@ -630,7 +532,6 @@
         window.onclick = function(event) {
             const infoModal = document.getElementById('infoModal');
             const popup = document.getElementById('popup');
-            const calculatorModal = document.getElementById('calculatorModal');
             
             if (event.target === infoModal) {
                 infoModal.classList.remove('active');
@@ -639,35 +540,7 @@
             if (event.target === popup) {
                 popup.classList.remove('active');
             }
-            
-            if (event.target === calculatorModal) {
-                closeCalculator();
-            }
         }
-        
-        // Cerrar con tecla Escape
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
-                closeCalculator();
-                closeInfoModal();
-                closePopup();
-            }
-        });
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
