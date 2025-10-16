@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tabla de Conversión Directv</title>
+    <title>Recargas Internacionales</title>
     <style>
         * {
             margin: 0;
@@ -13,534 +13,665 @@
         
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
-            color: #333;
-            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             min-height: 100vh;
-            padding: 20px;
+            background: linear-gradient(135deg, #ed7318, #ff9d4d);
+            padding: 15px;
+            overflow-x: hidden;
         }
         
         .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background-color: rgba(255, 255, 255, 0.95);
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            overflow: hidden;
-            position: relative;
-        }
-        
-        .header {
-            background: linear-gradient(to right, #007BFF, #0056b3);
-            color: white;
-            padding: 20px;
-            text-align: center;
-            position: relative;
-        }
-        
-        .header h1 {
-            font-size: 1.8rem;
-            margin-bottom: 10px;
-        }
-        
-        .header p {
-            font-size: 1rem;
-            opacity: 0.9;
-        }
-        
-        .close-button {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background-color: #dc3545;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 35px;
-            height: 35px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        }
-        
-        .close-button:hover {
-            background-color: #c82333;
-            transform: scale(1.1);
-        }
-        
-        .content {
-            padding: 25px;
-        }
-        
-        .conversion-table {
-            background-color: #f8f9fa;
-            padding: 25px;
-            border: 3px solid #007BFF;
-            border-radius: 12px;
-            text-align: center;
-            margin-bottom: 25px;
-            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.1);
-        }
-        
-        .conversion-table h2 {
-            color: #0056b3;
-            margin-bottom: 20px;
-            font-size: 1.5rem;
-            border-bottom: 2px solid #007BFF;
-            padding-bottom: 10px;
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
-            text-align: left;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: #444;
-        }
-        
-        .form-group input {
-            width: 100%;
-            padding: 12px 15px;
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            font-size: 16px;
-            transition: border-color 0.3s;
-        }
-        
-        .form-group input:focus {
-            border-color: #007BFF;
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
-        }
-        
-        .error {
-            color: #dc3545;
-            margin-top: 8px;
-            font-weight: 500;
-            display: none;
-        }
-        
-        .conversion-result {
-            font-size: 1.3rem;
-            color: #0056b3;
-            margin: 20px 0;
-            padding: 15px;
-            background-color: #e7f3ff;
-            border-radius: 8px;
-            border-left: 5px solid #007BFF;
-            font-weight: 600;
-            animation: blinkBlue 2s infinite;
-        }
-        
-        @keyframes blinkBlue {
-            0%, 100% {
-                color: #0056b3;
-                background-color: #e7f3ff;
-            }
-            50% {
-                color: #007BFF;
-                background-color: #d0e7ff;
-            }
-        }
-        
-        .copy-button {
-            display: inline-block;
-            margin: 15px 0;
-            padding: 12px 25px;
-            background: linear-gradient(to right, #28a745, #20c997);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        
-        .copy-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-            background: linear-gradient(to right, #218838, #1ea085);
-        }
-        
-        .hidden {
-            display: none;
-        }
-        
-        .back-button {
-            display: block;
-            width: 100%;
-            padding: 15px;
-            background: linear-gradient(to right, #6f42c1, #e83e8c);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 18px;
-            font-weight: 700;
-            text-align: center;
-            transition: all 0.3s ease;
-            margin-top: 20px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            text-decoration: none;
-        }
-        
-        .back-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-            background: linear-gradient(to right, #5a2d9c, #d91a72);
-        }
-        
-        .popup {
-            display: none;
-            position: fixed;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            background-color: white;
-            border: 3px solid #007BFF;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-            z-index: 1000;
             text-align: center;
             max-width: 90%;
-            width: 400px;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 25px 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 1;
+            margin: 10px auto;
         }
         
-        .popup.active {
+        h1 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: clamp(1.5rem, 4vw, 2.2rem);
+            line-height: 1.3;
+            word-wrap: break-word;
+        }
+        
+        p {
+            color: #555;
+            margin-bottom: 25px;
+            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+            line-height: 1.5;
+            word-wrap: break-word;
+        }
+        
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin: 25px 0;
+            position: relative;
+        }
+        
+        .custom-button {
+            display: inline-block;
+            cursor: pointer;
+            border: none;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            max-width: 95%;
+            position: relative;
+        }
+        
+        .custom-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .custom-button:active {
+            transform: translateY(0);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .button-image {
             display: block;
-            animation: popIn 0.3s ease;
+            width: 100%;
+            height: auto;
+            max-width: min(400px, 90vw);
+            border-radius: 10px;
         }
         
-        @keyframes popIn {
+        .info-box {
+            background-color: #f8f9fa;
+            border-left: 4px solid #ed7318;
+            padding: 15px;
+            margin-top: 25px;
+            border-radius: 0 8px 8px 0;
+            text-align: left;
+            word-wrap: break-word;
+        }
+        
+        .info-box h3 {
+            color: #ed7318;
+            margin-bottom: 10px;
+            font-size: clamp(1.1rem, 3vw, 1.3rem);
+        }
+        
+        .typewriter-container {
+            position: relative;
+            min-height: 60px;
+        }
+        
+        .typewriter-text {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            line-height: 1.5;
+            font-size: clamp(0.85rem, 2.5vw, 1rem);
+        }
+        
+        .typewriter-cursor {
+            display: inline-block;
+            width: 2px;
+            background-color: #ed7318;
+            animation: blink 1s infinite;
+            margin-left: 2px;
+        }
+        
+        /* Efectos de entretenimiento */
+        .entertainment-element {
+            position: absolute;
+            font-size: clamp(16px, 4vw, 20px);
+            opacity: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .element-1 { color: #ff6b6b; }
+        .element-2 { color: #4ecdc4; }
+        .element-3 { color: #ffd166; }
+        .element-4 { color: #06d6a0; }
+        .element-5 { color: #118ab2; }
+        .element-6 { color: #ef476f; }
+        
+        @keyframes float-element {
             0% {
-                opacity: 0;
-                transform: translate(-50%, -50%) scale(0.8);
+                transform: translateY(0) rotate(0deg) scale(1);
+                opacity: 1;
             }
             100% {
-                opacity: 1;
-                transform: translate(-50%, -50%) scale(1);
+                transform: translateY(-80px) rotate(360deg) scale(1.3);
+                opacity: 0;
             }
         }
         
-        .warning-message {
-            color: #dc3545;
-            font-size: 16px;
-            font-weight: bold;
+        @keyframes blink {
+            0%, 50% {
+                opacity: 1;
+            }
+            51%, 100% {
+                opacity: 0;
+            }
+        }
+        
+        /* Modal de horario de atención */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 15px;
+            overflow-y: auto;
+        }
+        
+        .modal-content {
+            background-color: white;
+            border-radius: 15px;
+            padding: 25px;
+            max-width: 95%;
+            width: 100%;
+            max-height: 95vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .modal-image {
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+            border-radius: 10px;
+            margin: 0 auto 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .modal-title {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: clamp(1.3rem, 4vw, 1.8rem);
+        }
+        
+        .modal-message {
+            color: #555;
+            margin-bottom: 20px;
+            line-height: 1.5;
+            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+            text-align: left;
+        }
+        
+        .modal-horario {
+            background-color: #f8f9fa;
+            border-left: 4px solid #ed7318;
+            padding: 12px;
+            margin-top: 20px;
+            border-radius: 0 8px 8px 0;
+            text-align: left;
+        }
+        
+        .modal-horario h4 {
+            color: #ed7318;
+            margin-bottom: 8px;
+            font-size: clamp(1rem, 3vw, 1.2rem);
+        }
+        
+        .recargas-section {
+            background-color: #e3f2fd;
+            border-left: 4px solid #0088cc;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 0 8px 8px 0;
+            text-align: left;
+        }
+        
+        .recargas-section h4 {
+            color: #0088cc;
+            margin-bottom: 10px;
+            font-size: clamp(1rem, 3vw, 1.2rem);
+        }
+        
+        .recargas-section p {
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .recargas-list {
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+        
+        .recargas-list li {
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .telegram-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .telegram-button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            text-decoration: none;
+            text-align: center;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 15px 0;
-            padding: 10px;
-            background-color: #ffeaea;
-            border-radius: 8px;
+            gap: 8px;
         }
         
-        .warning-message img {
-            margin-right: 10px;
-        }
-        
-        .info-popup {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 90%;
-            max-width: 600px;
-            background-color: white;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            z-index: 2000;
-            text-align: center;
-        }
-        
-        .info-popup.active {
-            display: block;
-            animation: popIn 0.4s ease;
-        }
-        
-        .info-popup-header {
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #007BFF;
-        }
-        
-        .info-popup-header img {
-            max-width: 130px;
-            margin-bottom: 15px;
-        }
-        
-        .info-popup-content {
-            text-align: left;
-            margin-bottom: 20px;
-            line-height: 1.6;
-        }
-        
-        .info-popup-content p {
-            margin-bottom: 15px;
-        }
-        
-        .info-popup-footer img {
-            max-width: 65%;
-            height: auto;
-            margin: 20px 0;
-        }
-        
-        .info-popup-close {
-            background: linear-gradient(to right, #007BFF, #0056b3);
+        .telegram-button.telegram {
+            background-color: #0088cc;
             color: white;
+        }
+        
+        .telegram-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .modal-button {
+            padding: 12px 30px;
             border: none;
-            padding: 12px 25px;
             border-radius: 8px;
             cursor: pointer;
-            font-size: 16px;
             font-weight: 600;
             transition: all 0.3s ease;
+            background-color: #ed7318;
+            color: white;
+            margin-top: 20px;
+            font-size: 1rem;
         }
         
-        .info-popup-close:hover {
-            background: linear-gradient(to right, #0056b3, #004494);
+        .modal-button:hover {
+            background-color: #d1620e;
             transform: translateY(-2px);
         }
         
-        @media (max-width: 600px) {
+        /* Media queries específicas para diferentes tamaños */
+        @media (max-width: 1200px) {
+            .container {
+                max-width: 95%;
+                padding: 20px 15px;
+            }
+        }
+        
+        @media (max-width: 768px) {
             body {
                 padding: 10px;
+                min-height: 100vh;
+                align-items: flex-start;
             }
             
             .container {
-                border-radius: 10px;
+                max-width: 98%;
+                padding: 20px 15px;
+                margin: 5px auto;
             }
             
-            .header h1 {
-                font-size: 1.4rem;
+            .button-image {
+                max-width: 95%;
             }
             
-            .content {
+            .info-box {
+                padding: 12px;
+                margin-top: 20px;
+            }
+            
+            .modal-content {
+                padding: 20px;
+                max-width: 98%;
+                max-height: 98vh;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            body {
+                padding: 8px;
+            }
+            
+            .container {
+                padding: 15px 10px;
+                border-radius: 15px;
+            }
+            
+            h1 {
+                margin-bottom: 12px;
+            }
+            
+            p {
+                margin-bottom: 20px;
+            }
+            
+            .button-container {
+                margin: 20px 0;
+            }
+            
+            .custom-button {
+                max-width: 98%;
+            }
+            
+            .typewriter-container {
+                min-height: 50px;
+            }
+            
+            .modal-content {
                 padding: 15px;
             }
             
-            .conversion-table {
-                padding: 15px;
-                border-width: 2px;
-            }
-            
-            .conversion-table h2 {
+            .modal-title {
                 font-size: 1.3rem;
             }
             
-            .conversion-result {
-                font-size: 1.1rem;
+            .telegram-buttons {
+                flex-direction: column;
+            }
+        }
+        
+        @media (max-width: 320px) {
+            .container {
+                padding: 12px 8px;
             }
             
-            .back-button {
-                font-size: 16px;
-                padding: 12px;
+            h1 {
+                font-size: 1.3rem;
             }
             
-            .info-popup {
-                width: 95%;
-                padding: 20px;
+            p {
+                font-size: 0.85rem;
             }
             
-            .info-popup-header img {
-                max-width: 100px;
+            .info-box h3 {
+                font-size: 1rem;
+            }
+            
+            .typewriter-text {
+                font-size: 0.8rem;
+            }
+        }
+        
+        /* Para pantallas muy altas */
+        @media (min-height: 1000px) {
+            body {
+                padding: 30px 15px;
+            }
+            
+            .container {
+                max-width: 800px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Modal para la información -->
-    <div id="infoModal" class="info-popup active">
-        <div class="info-popup-header">
-            <img src="https://www.vendeygana.net/assets/img/logo-1.png" alt="Vende y Gana">
-            <h2>VENDE Y GANA INFORMA</h2>
-        </div>
-        <div class="info-popup-content">
-            <p>¡Hola! Gusto en Saludarte. 👋🏻</p>
-            <p>Te informamos que a partir del día 06/05/2025, los parámetros de recargas para la operadora Otros Servicios TV (DirecTV Colombia) son los siguientes:</p>
-            <p><strong>Mínima:</strong> 12.000 COP<br>
-            <strong>Múltiplos:</strong> 1.000 COP<br>
-            <strong>Máximo:</strong> 650.000 COP</p>
-            <p>Agradecemos tomar las previsiones correspondientes.</p>
-        </div>
-        <div class="info-popup-footer">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Directv_LA_logo.svg/2560px-Directv_LA_logo.svg.png" alt="Directv Logo">
-        </div>
-        <button class="info-popup-close" onclick="closeInfoModal()">Entendido</button>
-    </div>
-
     <div class="container">
-        <div class="header">
-            <h1>Calculadora de Conversión Directv</h1>
-            <p>Convierte pesos colombianos a bolívares para recargas Directv</p>
-            <button class="close-button" onclick="redirectToUrl()">X</button>
-        </div>
-
-        <div class="content">
-            <!-- Tabla de conversión -->
-            <div class="conversion-table" id="conversionTable">
-                <h2>Tabla de Conversión de Pesos a Bolívares</h2>
-                <div class="form-group">
-                    <label for="monto">Ingrese el monto a recargar en pesos:</label>
-                    <input type="number" id="monto" name="monto" placeholder="Ej: 12000" oninput="convertToBs()" required>
-                    <span id="minRecargaMsg" class="error">Recarga Mínima 12.000 Pesos</span>
-                </div>
-                
-                <div class="conversion-result" id="conversionResult"></div>
-                <button class="copy-button hidden" id="copyButton" onclick="copyConversion()">Copiar información de conversión</button>
-            </div>
-            
-            <!-- Botón para regresar a Vende y Gana -->
-            <a href="https://vendeyganaservicios.company.site/products/directv" class="back-button" id="backButton">
-                REGRESAR A VENDE Y GANA
+        <h1>Recargas Internacionales</h1>
+        <p>En esta sección podrás recargar saldo de TV como DIRECTV Colombia, y operadoras de telefonía móvil como Movistar, Entel, Éxito y más</p>
+        
+        <div class="button-container">
+            <a href="https://vendeyganaservicios.company.site/products/recarga-directv" target="_blank" class="custom-button" id="entertainment-button">
+                <img src="https://i.pinimg.com/736x/dd/95/73/dd95733209e776190ac13e8388534e49.jpg" 
+                     alt="Recargas Internacionales" 
+                     class="button-image">
             </a>
         </div>
-    </div>
-
-    <div class="popup" id="popup">
-        <div>Monto copiado. Pegue en el espacio que dice MONTO A RECARGAR.</div>
-        <br>
-        <div class="warning-message">
-            <img src="https://i.imgur.com/O3V7Z7M.gif" alt="Advertencia" width="30">
-            <span>NOTA IMPORTANTE: NO ALTERE EL MENSAJE O SE BLOQUEA SU USUARIO VENDE Y GANA</span>
+        
+        <div class="info-box">
+            <h3>¿Cómo funciona?</h3>
+            <div class="typewriter-container" id="typewriter-container">
+                <!-- El texto se generará dinámicamente con JavaScript -->
+            </div>
         </div>
-        <br>
-        <button onclick="closePopup()" style="padding: 8px 15px; background: #007BFF; color: white; border: none; border-radius: 5px; cursor: pointer;">Cerrar</button>
     </div>
 
-    <!-- JavaScript -->
+    <!-- Modal de horario de atención -->
+    <div id="horario-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-content">
+            <img src="https://i.pinimg.com/736x/dd/95/73/dd95733209e776190ac13e8388534e49.jpg" 
+                 alt="Recargas Internacionales" 
+                 class="modal-image">
+            <h2 class="modal-title">Recargas Internacionales</h2>
+            
+            <div class="recargas-section">
+                <h4>DIRECTV Colombia</h4>
+                <p>Realiza recargas para tu servicio de DIRECTV Colombia de forma rápida y segura:</p>
+                <ul class="recargas-list">
+                    <li>Recarga de paquetes básicos y premium</li>
+                    <li>Pago de facturas mensuales</li>
+                    <li>Activación de promociones especiales</li>
+                    <li>Suscripción a canales y eventos deportivos</li>
+                    <li>Paquetes de películas y series</li>
+                </ul>
+            </div>
+            
+            <div class="recargas-section">
+                <h4>Operadoras de Telefonía Móvil</h4>
+                <p>Recarga saldo para todas las operadoras móviles en Colombia:</p>
+                <ul class="recargas-list">
+                    <li><strong>Movistar:</strong> Recarga de saldo, paquetes de datos, minutos y mensajes</li>
+                    <li><strong>Entel:</strong> Recargas express, paquetes de internet y minutos ilimitados</li>
+                    <li><strong>Éxito Móvil:</strong> Recargas, paquetes de navegación y promociones</li>
+                    <li><strong>Claro:</strong> Recargas desde cualquier monto, paquetes de navegación y promociones</li>
+                    <li><strong>Tigo:</strong> Recargas, paquetes de redes sociales y planes pospago</li>
+                    <li><strong>WOM:</strong> Recargas, paquetes de datos y minutos nacionales</li>
+                </ul>
+            </div>
+            
+            <div class="modal-horario">
+                <h4>Nuestro horario de atención:</h4>
+                <p>Lunes a Sábado: 8:30 AM a 9:00 PM</p>
+                <p>Domingos: 10:00 AM a 7:00 PM</p>
+            </div>
+            
+            <div class="telegram-buttons">
+                <a href="https://t.me/panaxvendeygana_bot" target="_blank" class="telegram-button telegram">
+                    <span>📱</span> Ir al canal de Telegram
+                </a>
+            </div>
+            
+            <button id="modal-entendido" class="modal-button">ENTENDIDO</button>
+        </div>
+    </div>
+
+    <!-- Audio para el efecto de sonido -->
+    <audio id="entertainment-sound" preload="auto">
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3" type="audio/mpeg">
+    </audio>
+
     <script>
-        const conversionTable = {
-            1000: 110.00,
-            2000: 220.00,
-            3000: 270.00,
-            4000: 360.00,
-            5000: 450.00,
-            6000: 560.00,
-            7000: 640.00,
-            8000: 710.00,
-            9000: 90.00,
-            10000: 1050.00,
-            20000: 1980.00,
-            30000: 2930.00,
-            40000: 3850.00,
-            50000: 4780.00,
-            60000: 5750.00,
-            70000: 6650.00,
-            80000: 7580.00,
-            90000: 8540.00,
-            100000: 9480.00,
-            110000: 10250.00,
-            120000: 11250.00,
-            130000: 11980.00,
-            140000: 13000.00,
-            150000: 11900.00
-        };
-        
-        let minRecarga = 12000; // Mínima recarga en pesos actualizada
-
-        // Función para cerrar el modal de información
-        function closeInfoModal() {
-            document.getElementById('infoModal').classList.remove('active');
-        }
-
-        // Función para convertir pesos a bolívares
-        function convertToBs() {
-            const montoInput = parseInt(document.getElementById('monto').value, 10);
-            const minRecargaMsg = document.getElementById('minRecargaMsg');
-            const conversionResult = document.getElementById('conversionResult');
-            const copyButton = document.getElementById('copyButton');
-            let costo = 0;
-
-            if (isNaN(montoInput)) {
-                minRecargaMsg.style.display = 'none';
-                conversionResult.textContent = '';
-                copyButton.classList.add('hidden');
-                return;
+        document.addEventListener('DOMContentLoaded', function() {
+            const text = "Selecciona el servicio que necesitas recargar, elige el monto o paquete deseado, realiza el pago de forma segura y recibirás la confirmación de tu recarga en minutos. Proceso rápido, seguro y disponible 24/7 para tu conveniencia.";
+            const container = document.getElementById('typewriter-container');
+            const entertainmentButton = document.getElementById('entertainment-button');
+            const entertainmentSound = document.getElementById('entertainment-sound');
+            const horarioModal = document.getElementById('horario-modal');
+            const modalEntendido = document.getElementById('modal-entendido');
+            const speed = 50; // Velocidad de escritura en milisegundos
+            
+            // Símbolos de entretenimiento
+            const entertainmentElements = ['📱', '📺', '💰', '🔄', '⚡', '✅', '🔒', '🌎'];
+            
+            // Variable para controlar si el usuario ya vio el modal
+            let modalVisto = false;
+            
+            // Función para verificar si estamos fuera del horario de atención
+            function estaFueraDeHorario() {
+                const ahora = new Date();
+                const dia = ahora.getDay(); // 0 = Domingo, 1 = Lunes, ..., 6 = Sábado
+                const hora = ahora.getHours();
+                const minutos = ahora.getMinutes();
+                const horaActual = hora + minutos / 100;
+                
+                // Lunes a Sábado: después de las 9 PM (21:00) y hasta las 8:30 AM (8.5)
+                if (dia >= 1 && dia <= 6) {
+                    if (horaActual >= 21 || horaActual < 8.5) {
+                        return true;
+                    }
+                }
+                // Domingo: después de las 7 PM (19:00) y hasta las 10 AM (10.0)
+                else if (dia === 0) {
+                    if (horaActual >= 19 || horaActual < 10) {
+                        return true;
+                    }
+                }
+                
+                return false;
             }
-
-            if (montoInput < minRecarga) {
-                minRecargaMsg.style.display = 'block';
-                conversionResult.textContent = '';
-                copyButton.classList.add('hidden');
-                return;
-            } else {
-                minRecargaMsg.style.display = 'none';
+            
+            // Mostrar modal si estamos fuera de horario y el usuario no lo ha visto aún
+            if (estaFueraDeHorario() && !modalVisto) {
+                horarioModal.style.display = 'flex';
             }
-
-            // Redondear el monto a múltiplos de mil
-            const roundedMonto = Math.round(montoInput / 1000) * 1000;
-
-            // Descomponer el monto en múltiplos de 10,000 y 1,000
-            const multiplesDeDiezMil = Math.floor(roundedMonto / 10000) * 10000;
-            const multiplesDeMil = roundedMonto % 10000;
-
-            if (multiplesDeDiezMil in conversionTable) {
-                costo += conversionTable[multiplesDeDiezMil];
-            }
-            if (multiplesDeMil in conversionTable) {
-                costo += conversionTable[multiplesDeMil];
-            }
-
-            const resultText = `Monto en Pesos: ${roundedMonto.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} - Costo en BS: ${costo.toFixed(2)} BS`;
-            conversionResult.textContent = resultText; // Mostrar en formato de 2 decimales
-            copyButton.classList.remove('hidden');
-        }
-
-        // Función para copiar los datos de la conversión
-        function copyConversion() {
-            const conversionResult = document.getElementById('conversionResult').textContent;
-            navigator.clipboard.writeText(conversionResult).then(() => {
-                showPopup();
+            
+            // Evento para el botón ENTENDIDO del modal
+            modalEntendido.addEventListener('click', function() {
+                horarioModal.style.display = 'none';
+                modalVisto = true;
             });
-        }
-
-        // Función para mostrar popup
-        function showPopup() {
-            document.getElementById('popup').classList.add('active');
-        }
-
-        // Función para cerrar popup
-        function closePopup() {
-            document.getElementById('popup').classList.remove('active');
-        }
-
-        // Función para redirigir al enlace proporcionado o regresar a la página anterior
-        function redirectToUrl() {
-            if (document.referrer) {
-                window.history.back(); // Regresa a la página anterior
-            } else {
-                window.location.href = 'https://www.vendeygana.net/user/'; // Redirige a la URL por defecto
-            }
-        }
-        
-        // Cerrar modales al hacer clic fuera de ellos
-        window.onclick = function(event) {
-            const infoModal = document.getElementById('infoModal');
-            const popup = document.getElementById('popup');
             
-            if (event.target === infoModal) {
-                infoModal.classList.remove('active');
+            // Cerrar modal al hacer clic fuera del contenido
+            horarioModal.addEventListener('click', function(e) {
+                if (e.target === horarioModal) {
+                    horarioModal.style.display = 'none';
+                    modalVisto = true;
+                }
+            });
+            
+            function typeWriter() {
+                container.innerHTML = ''; // Limpiar contenedor
+                let i = 0;
+                
+                function type() {
+                    if (i < text.length) {
+                        // Crear un span para el texto ya escrito
+                        const typedSpan = document.createElement('span');
+                        typedSpan.className = 'typewriter-text';
+                        typedSpan.textContent = text.substring(0, i + 1);
+                        
+                        // Crear cursor
+                        const cursorSpan = document.createElement('span');
+                        cursorSpan.className = 'typewriter-cursor';
+                        
+                        // Actualizar contenido
+                        container.innerHTML = '';
+                        container.appendChild(typedSpan);
+                        container.appendChild(cursorSpan);
+                        
+                        i++;
+                        setTimeout(type, speed);
+                    } else {
+                        // Cuando termine, mostrar solo el texto sin cursor
+                        const finalText = document.createElement('span');
+                        finalText.className = 'typewriter-text';
+                        finalText.textContent = text;
+                        container.innerHTML = '';
+                        container.appendChild(finalText);
+                    }
+                }
+                
+                type();
             }
             
-            if (event.target === popup) {
-                popup.classList.remove('active');
+            // Función para crear elementos de entretenimiento
+            function createEntertainmentElements() {
+                for (let i = 0; i < 12; i++) {
+                    setTimeout(() => {
+                        const element = document.createElement('div');
+                        element.className = `entertainment-element element-${(i % 6) + 1}`;
+                        element.textContent = entertainmentElements[i % entertainmentElements.length];
+                        
+                        // Posición aleatoria alrededor del botón
+                        const buttonRect = entertainmentButton.getBoundingClientRect();
+                        const randomX = Math.random() * buttonRect.width;
+                        
+                        element.style.left = `${buttonRect.left + randomX}px`;
+                        element.style.top = `${buttonRect.bottom}px`;
+                        
+                        document.body.appendChild(element);
+                        
+                        // Animación del elemento
+                        element.style.animation = `float-element 1.8s ease-out forwards`;
+                        
+                        // Eliminar el elemento después de la animación
+                        setTimeout(() => {
+                            if (element.parentNode) {
+                                element.parentNode.removeChild(element);
+                            }
+                        }, 1800);
+                    }, i * 100);
+                }
             }
-        }
+            
+            // Evento para el botón de entretenimiento
+            entertainmentButton.addEventListener('click', function(e) {
+                // Si estamos fuera de horario y el usuario no ha visto el modal, mostrarlo y prevenir la acción por defecto
+                if (estaFueraDeHorario() && !modalVisto) {
+                    e.preventDefault();
+                    horarioModal.style.display = 'flex';
+                    return;
+                }
+                
+                // Reproducir sonido
+                entertainmentSound.currentTime = 0;
+                entertainmentSound.play().catch(error => {
+                    console.log('La reproducción automática de audio fue prevenida:', error);
+                });
+                
+                // Crear elementos de entretenimiento
+                createEntertainmentElements();
+                
+                // Efecto de pulsación
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 150);
+            });
+            
+            // Efecto de elementos al pasar el mouse
+            entertainmentButton.addEventListener('mouseenter', function() {
+                createEntertainmentElements();
+            });
+            
+            // Ajustar el contenedor en dispositivos móviles
+            function adjustLayout() {
+                const isMobile = window.innerWidth <= 768;
+                if (isMobile) {
+                    document.body.style.alignItems = 'flex-start';
+                    document.body.style.paddingTop = '20px';
+                } else {
+                    document.body.style.alignItems = 'center';
+                    document.body.style.paddingTop = '15px';
+                }
+            }
+            
+            // Ajustar layout al cargar y al redimensionar
+            adjustLayout();
+            window.addEventListener('resize', adjustLayout);
+            
+            // Iniciar efecto máquina de escribir
+            typeWriter();
+        });
     </script>
 </body>
 </html>
