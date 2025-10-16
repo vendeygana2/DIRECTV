@@ -3,197 +3,260 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario y Tabla de Conversión</title>
+    <title>Calculadora Directv - Ventana Emergente</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            background-color: #f0f0f0;
         }
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            background-color: #fff;
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
             padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: filter 0.3s ease;
+        }
+        
+        body.blurred {
+            filter: blur(5px);
+            pointer-events: none;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
             position: relative;
         }
+        
+        .header {
+            background: linear-gradient(to right, #007BFF, #0056b3);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+        
         .close-button {
             position: absolute;
-            top: 10px;
-            right: 10px;
-            background-color: red;
+            top: 15px;
+            right: 15px;
+            background-color: #dc3545;
             color: white;
             border: none;
             border-radius: 50%;
-            width: 30px;
-            height: 30px;
+            width: 35px;
+            height: 35px;
             cursor: pointer;
             font-size: 16px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        
+        .close-button:hover {
+            background-color: #c82333;
+            transform: scale(1.1);
+        }
+        
+        .content {
+            padding: 25px;
+        }
+        
+        .conversion-table {
+            background-color: #f8f9fa;
+            padding: 25px;
+            border: 3px solid #007BFF;
+            border-radius: 12px;
             text-align: center;
-            line-height: 30px;
-            z-index: 1000;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.1);
         }
+        
+        .conversion-table h2 {
+            color: #0056b3;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            border-bottom: 2px solid #007BFF;
+            padding-bottom: 10px;
+        }
+        
         .form-group {
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            text-align: left;
         }
+        
         .form-group label {
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #444;
         }
+        
         .form-group input {
             width: 100%;
-            padding: 8px;
-            box-sizing: border-box;
-            margin-bottom: 20px;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
         }
+        
+        .form-group input:focus {
+            border-color: #007BFF;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+        }
+        
         .error {
-            color: red;
-            margin-top: 10px;
+            color: #dc3545;
+            margin-top: 8px;
+            font-weight: 500;
             display: none;
         }
-        .conversion-table {
-            background-color: #fff;
-            padding: 20px;
-            border: 5px solid #007BFF;
-            border-radius: 15px;
-            text-align: center;
-            margin-top: 20px;
-            position: relative;
-        }
-        .conversion-table h2 {
-            margin-bottom: 20px;
-        }
+        
         .conversion-result {
-            font-size: 18px;
-            color: #333;
-            margin-top: 20px;
-            animation: blinkBlue 1s infinite;
+            font-size: 1.3rem;
+            color: #0056b3;
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #e7f3ff;
+            border-radius: 8px;
+            border-left: 5px solid #007BFF;
+            font-weight: 600;
+            animation: blinkBlue 2s infinite;
         }
+        
         @keyframes blinkBlue {
             0%, 100% {
-                color: #007BFF;
+                color: #0056b3;
+                background-color: #e7f3ff;
             }
             50% {
-                color: #333;
+                color: #007BFF;
+                background-color: #d0e7ff;
             }
         }
+        
         .copy-button {
             display: inline-block;
-            margin-top: 20px;
-            padding: 10px 20px;
-            background-color: #007BFF;
-            color: #fff;
+            margin: 15px 0;
+            padding: 12px 25px;
+            background: linear-gradient(to right, #28a745, #20c997);
+            color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
             font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
-        .toggle-button {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 10px 20px;
-            background-color: #000;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            position: relative;
-            overflow: hidden;
-            transition: transform 0.3s, top 0.3s, left 0.3s;
+        
+        .copy-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+            background: linear-gradient(to right, #218838, #1ea085);
         }
-        .toggle-button.minimized {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%) scale(1.25);
-            font-size: 12px;
-            animation: blink 1s infinite;
-        }
+        
         .hidden {
             display: none;
         }
+        
+        .back-button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(to right, #6f42c1, #e83e8c);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 700;
+            text-align: center;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-decoration: none;
+        }
+        
+        .back-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(to right, #5a2d9c, #d91a72);
+        }
+        
         .popup {
             display: none;
             position: fixed;
             left: 50%;
             top: 50%;
             transform: translate(-50%, -50%);
-            background-color: #fff;
+            background-color: white;
             border: 3px solid #007BFF;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
             z-index: 1000;
             text-align: center;
+            max-width: 90%;
+            width: 400px;
         }
+        
         .popup.active {
             display: block;
+            animation: popIn 0.3s ease;
         }
+        
+        @keyframes popIn {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.8);
+            }
+            100% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
+        
         .warning-message {
-            color: red;
+            color: #dc3545;
             font-size: 16px;
             font-weight: bold;
-            animation: blinkRed 1s infinite;
             display: flex;
             align-items: center;
             justify-content: center;
+            margin: 15px 0;
+            padding: 10px;
+            background-color: #ffeaea;
+            border-radius: 8px;
         }
-        @keyframes blinkRed {
-            0%, 100% {
-                opacity: 1;
-            }
-            50% {
-                opacity: 0.5;
-            }
-        }
+        
         .warning-message img {
             margin-right: 10px;
         }
-        .iframe-container {
-            width: 100%;
-            margin-top: 20px;
-        }
-        .iframe-container iframe {
-            width: 100%;
-            height: 100vh; /* Ajusta el alto al 100% de la pantalla */
-            border: none;
-        }
-        /* Estilos para el modal de imagen */
-        .image-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.9);
-            z-index: 2000;
-            text-align: center;
-        }
-        .image-modal-content {
-            max-width: 90%;
-            max-height: 90%;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-        .close-modal {
-            position: absolute;
-            top: 15px;
-            right: 35px;
-            color: #f1f1f1;
-            font-size: 40px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        /* Nuevos estilos para el popup informativo */
+        
         .info-popup {
             display: none;
             position: fixed;
@@ -203,83 +266,217 @@
             width: 90%;
             max-width: 600px;
             background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.3);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             z-index: 2000;
             text-align: center;
         }
+        
         .info-popup.active {
             display: block;
+            animation: popIn 0.4s ease;
         }
+        
         .info-popup-header {
             margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #007BFF;
         }
+        
         .info-popup-header img {
-            max-width: 130px; /* Reducido en 35% desde 200px */
+            max-width: 130px;
             margin-bottom: 15px;
         }
+        
         .info-popup-content {
             text-align: left;
             margin-bottom: 20px;
             line-height: 1.6;
         }
-        .info-popup-footer img {
-            max-width: 65%; /* Reducido en 35% desde 100% */
-            height: auto;
-            margin-top: 20px;
+        
+        .info-popup-content p {
+            margin-bottom: 15px;
         }
+        
+        .info-popup-footer img {
+            max-width: 65%;
+            height: auto;
+            margin: 20px 0;
+        }
+        
         .info-popup-close {
-            background-color: #007BFF;
+            background: linear-gradient(to right, #007BFF, #0056b3);
             color: white;
             border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
+            padding: 12px 25px;
+            border-radius: 8px;
             cursor: pointer;
             font-size: 16px;
-            margin-top: 20px;
+            font-weight: 600;
+            transition: all 0.3s ease;
         }
+        
+        .info-popup-close:hover {
+            background: linear-gradient(to right, #0056b3, #004494);
+            transform: translateY(-2px);
+        }
+        
+        /* Estilos para simular la página de origen */
+        .page-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .page-title {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+        }
+        
+        .open-calculator-btn {
+            display: block;
+            width: 300px;
+            margin: 30px auto;
+            padding: 15px 25px;
+            background: linear-gradient(to right, #007BFF, #0056b3);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .open-calculator-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .service-description {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #007BFF;
+        }
+        
         @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            
             .container {
-                padding: 10px;
-                border-radius: 0;
-                box-shadow: none;
+                border-radius: 10px;
             }
-            .conversion-table {
-                border-width: 3px;
-                padding: 10px;
+            
+            .header h1 {
+                font-size: 1.4rem;
             }
-            .toggle-button {
-                font-size: 14px;
-                padding: 8px 16px;
-            }
-            .toggle-button.minimized {
-                bottom: 0;
-                transform: translateX(-50%);
-            }
-            .conversion-table.hidden + .form-group {
-                margin-top: 0;
-            }
-            .image-modal-content {
-                max-width: 95%;
-                max-height: 95%;
-            }
-            .close-modal {
-                top: 10px;
-                right: 20px;
-                font-size: 30px;
-            }
-            .info-popup {
-                width: 95%;
+            
+            .content {
                 padding: 15px;
             }
+            
+            .conversion-table {
+                padding: 15px;
+                border-width: 2px;
+            }
+            
+            .conversion-table h2 {
+                font-size: 1.3rem;
+            }
+            
+            .conversion-result {
+                font-size: 1.1rem;
+            }
+            
+            .back-button {
+                font-size: 16px;
+                padding: 12px;
+            }
+            
+            .info-popup {
+                width: 95%;
+                padding: 20px;
+            }
+            
             .info-popup-header img {
-                max-width: 100px; /* Reducido proporcionalmente para móvil */
+                max-width: 100px;
+            }
+            
+            .open-calculator-btn {
+                width: 90%;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Contenido de ejemplo para simular la página de origen -->
+    <div class="page-content">
+        <h1 class="page-title">Vende y Gana - Servicios Directv</h1>
+        
+        <div class="service-description">
+            <h2>Recargas Directv Colombia</h2>
+            <p>Realiza recargas para Directv Colombia de forma rápida y segura. Utiliza nuestra calculadora para conocer el monto exacto en bolívares que debes pagar por tu recarga en pesos colombianos.</p>
+            <p><strong>Parámetros actualizados:</strong></p>
+            <ul>
+                <li>Mínima: 12.000 COP</li>
+                <li>Múltiplos: 1.000 COP</li>
+                <li>Máximo: 650.000 COP</li>
+            </ul>
+        </div>
+        
+        <button class="open-calculator-btn" onclick="openCalculator()">Abrir Calculadora de Conversión</button>
+        
+        <div class="service-description">
+            <h3>¿Cómo funciona?</h3>
+            <p>1. Haz clic en "Abrir Calculadora de Conversión"</p>
+            <p>2. Ingresa el monto en pesos colombianos que deseas recargar</p>
+            <p>3. La calculadora te mostrará automáticamente el equivalente en bolívares</p>
+            <p>4. Copia la información y pégala en el formulario de recarga</p>
+        </div>
+    </div>
+
+    <!-- Calculadora (inicialmente oculta) -->
+    <div id="calculatorModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1000; background-color: rgba(0,0,0,0.7);">
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 90%; max-width: 800px; max-height: 90vh; overflow-y: auto;">
+            <div class="container">
+                <div class="header">
+                    <h1>Calculadora de Conversión Directv</h1>
+                    <p>Convierte pesos colombianos a bolívares para recargas Directv</p>
+                    <button class="close-button" onclick="closeCalculator()">X</button>
+                </div>
+
+                <div class="content">
+                    <!-- Tabla de conversión -->
+                    <div class="conversion-table" id="conversionTable">
+                        <h2>Tabla de Conversión de Pesos a Bolívares</h2>
+                        <div class="form-group">
+                            <label for="monto">Ingrese el monto a recargar en pesos:</label>
+                            <input type="number" id="monto" name="monto" placeholder="Ej: 12000" oninput="convertToBs()" required>
+                            <span id="minRecargaMsg" class="error">Recarga Mínima 12.000 Pesos</span>
+                        </div>
+                        
+                        <div class="conversion-result" id="conversionResult"></div>
+                        <button class="copy-button hidden" id="copyButton" onclick="copyConversion()">Copiar información de conversión</button>
+                    </div>
+                    
+                    <!-- Botón para regresar a Vende y Gana -->
+                    <a href="https://vendeyganaservicios.company.site/products/directv" class="back-button" id="backButton">
+                        REGRESAR A VENDE Y GANA
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Modal para la información -->
     <div id="infoModal" class="info-popup active">
         <div class="info-popup-header">
@@ -300,30 +497,6 @@
         <button class="info-popup-close" onclick="closeInfoModal()">Entendido</button>
     </div>
 
-    <div class="container">
-        <button class="close-button" onclick="redirectToUrl()">X</button>
-
-        <!-- Tabla de conversión en la parte superior -->
-        <div class="conversion-table" id="conversionTable">
-            <h2>Tabla de Conversión de Pesos a Bolívares - Recarga Directv</h2>
-            <div class="conversion-result" id="conversionResult"></div>
-            <button class="copy-button hidden" id="copyButton" onclick="copyConversion()">Haga click aquí y copie y pegue en el monto a recargar</button>
-            <div class="form-group">
-                <label for="monto">Ingrese aquí el Monto a Recargar en Pesos para ver el Monto a Pagar en BS:</label>
-                <input type="number" id="monto" name="monto" oninput="convertToBs()" required>
-                <span id="minRecargaMsg" class="error">Recarga Mínima 12.000 Pesos</span>
-            </div>
-        </div>
-
-        <!-- Botón para minimizar la tabla de conversión -->
-        <button class="toggle-button" id="toggleButton" onclick="toggleConversionTable()">MINIMIZAR TABLA DE CONVERSIÓN</button>
-
-        <!-- Contenedor para el formulario embebido -->
-        <div class="iframe-container">
-            <iframe src="https://96vxnn73.forms.app/recargadirectv"></iframe>
-        </div>
-    </div>
-
     <div class="popup" id="popup">
         <div>Monto copiado. Pegue en el espacio que dice MONTO A RECARGAR.</div>
         <br>
@@ -332,38 +505,51 @@
             <span>NOTA IMPORTANTE: NO ALTERE EL MENSAJE O SE BLOQUEA SU USUARIO VENDE Y GANA</span>
         </div>
         <br>
-        <button onclick="closePopup()">Cerrar</button>
+        <button onclick="closePopup()" style="padding: 8px 15px; background: #007BFF; color: white; border: none; border-radius: 5px; cursor: pointer;">Cerrar</button>
     </div>
 
     <!-- JavaScript -->
     <script>
         const conversionTable = {
-1000: 110.00,
-2000: 220.00,
-3000: 270.00,
-4000: 360.00,
-5000: 450.00,
-6000: 560.00,
-7000: 640.00,
-8000: 710.00,
-9000: 90.00,
-10000: 1050.00,
-20000: 1980.00,
-30000: 2930.00,
-40000: 3850.00,
-50000: 4780.00,
-60000: 5750.00,
-70000: 6650.00,
-80000: 7580.00,
-90000: 8540.00,
-100000: 9480.00,
-110000: 10250.00,
-120000: 11250.00,
-130000: 11980.00,
-140000: 13000.00,
-150000: 11900.00
+            1000: 110.00,
+            2000: 220.00,
+            3000: 270.00,
+            4000: 360.00,
+            5000: 450.00,
+            6000: 560.00,
+            7000: 640.00,
+            8000: 710.00,
+            9000: 90.00,
+            10000: 1050.00,
+            20000: 1980.00,
+            30000: 2930.00,
+            40000: 3850.00,
+            50000: 4780.00,
+            60000: 5750.00,
+            70000: 6650.00,
+            80000: 7580.00,
+            90000: 8540.00,
+            100000: 9480.00,
+            110000: 10250.00,
+            120000: 11250.00,
+            130000: 11980.00,
+            140000: 13000.00,
+            150000: 11900.00
         };
+        
         let minRecarga = 12000; // Mínima recarga en pesos actualizada
+
+        // Función para abrir la calculadora
+        function openCalculator() {
+            document.getElementById('calculatorModal').style.display = 'block';
+            document.body.classList.add('blurred');
+        }
+
+        // Función para cerrar la calculadora
+        function closeCalculator() {
+            document.getElementById('calculatorModal').style.display = 'none';
+            document.body.classList.remove('blurred');
+        }
 
         // Función para cerrar el modal de información
         function closeInfoModal() {
@@ -431,20 +617,6 @@
             document.getElementById('popup').classList.remove('active');
         }
 
-        // Función para minimizar y maximizar la tabla de conversión
-        function toggleConversionTable() {
-            const conversionTable = document.getElementById('conversionTable');
-            const toggleButton = document.getElementById('toggleButton');
-
-            if (conversionTable.classList.contains('hidden')) {
-                conversionTable.classList.remove('hidden');
-                toggleButton.textContent = 'MINIMIZAR TABLA DE CONVERSIÓN';
-            } else {
-                conversionTable.classList.add('hidden');
-                toggleButton.textContent = 'MAXIMIZAR TABLA DE CONVERSIÓN';
-            }
-        }
-
         // Función para redirigir al enlace proporcionado o regresar a la página anterior
         function redirectToUrl() {
             if (document.referrer) {
@@ -453,9 +625,38 @@
                 window.location.href = 'https://www.vendeygana.net/user/'; // Redirige a la URL por defecto
             }
         }
+        
+        // Cerrar modales al hacer clic fuera de ellos
+        window.onclick = function(event) {
+            const infoModal = document.getElementById('infoModal');
+            const popup = document.getElementById('popup');
+            const calculatorModal = document.getElementById('calculatorModal');
+            
+            if (event.target === infoModal) {
+                infoModal.classList.remove('active');
+            }
+            
+            if (event.target === popup) {
+                popup.classList.remove('active');
+            }
+            
+            if (event.target === calculatorModal) {
+                closeCalculator();
+            }
+        }
+        
+        // Cerrar con tecla Escape
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeCalculator();
+                closeInfoModal();
+                closePopup();
+            }
+        });
     </script>
 </body>
 </html>
+
 
 
 
